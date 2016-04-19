@@ -98,8 +98,3 @@ class Factory
     end
   end
 end
-
-
-Customer = Factory.new(:name, :zip)
-joe = Customer.new()
-p joe.size #=> "123 Maple, Anytown NC"
