@@ -3,21 +3,21 @@
 Customer = Struct.new(:name, :address, :zip)
 => Customer
  
-joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
-=> #<struct Customer name="Joe Smith", address="123 Maple, Anytown NC", zip=12345>
+joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345) <br />
+=> #\<struct Customer name="Joe Smith", address="123 Maple, Anytown NC", zip=12345>
  
 joe.name
-joe["name"]
-joe[:name]
-joe[0]
+joe["name"]<br />
+joe[:name]<br />
+joe[0]  <br />
 => "Joe Smith"
 
 -----------
 
-Customer = Struct.new(:name, :address) do
-  def greeting
-    "Hello #{name}!"
-  end
-end
-Customer.new("Dave", "123 Main").greeting
+Customer = Struct.new(:name, :address) do  <br />
+   def greeting <br />
+     "Hello #{name}!" <br />
+   end <br />
+end <br />
+Customer.new("Dave", "123 Main").greeting <br />
 => "Hello Dave!"
