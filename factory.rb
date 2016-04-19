@@ -53,6 +53,18 @@ class Factory
         @@args
       end
 
+      def to_a(*arg)
+        @attributes.to_a(*arg)
+      end
+
+      def to_h
+          hash = Hash.new
+          @@args.each_with_index() do |value, i|
+            hash[value] = @attributes[i]
+          end
+          hash
+      end
+
       def to_s
         str = "#<factory #{self.class} "
         @attributes.each_with_index do |value, i|
@@ -65,9 +77,22 @@ class Factory
         str
       end
 
-      def values_at
-
+      def values_at(*arg)
+        result = []
+        return result if arg.length == 0
+        arg.each do |i|
+          raise IndexError, "offset #{i} too large for struct(size:#{@attributes.size})" if @attributes.size <= i
+          result << @attributes[i]
+        end
+        result
       end
+
+      def length
+        members.length
+      end
+
+      alias :size :length
+      alias :inspect :to_s
 
       self.class_eval(&block) if block_given?
     end
@@ -75,5 +100,6 @@ class Factory
 end
 
 
-
-
+Customer = Factory.new(:name, :zip)
+joe = Customer.new()
+p joe.size #=> "123 Maple, Anytown NC"
