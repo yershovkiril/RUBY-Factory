@@ -15,22 +15,22 @@ class Factory
       def initialize(*attributes)
         @attributes = attributes
         raise ArgumentError, "factory size differs" if attributes.size > @@args.size
-        @@args.each_with_index { |value, i| instance_variable_set("@#{@@args[i]}", attributes[i]) }
+        @@args.each_with_index { |value, i| send("#{@@args[i]}=", attributes[i]) }
       end
 
       def [](arg)
         if arg.kind_of? Fixnum
-          instance_variable_get("@#{@@args[arg]}")
+          send("#{@@args[arg]}")
         else
-          instance_variable_get("@#{arg}")
+          send("#{arg}")
         end
       end
 
       def []=(arg, value)
         if arg.kind_of? Fixnum
-          instance_variable_set("@#{@@args[arg]}", value)
+          send("#{@@args[arg]}=", value)
         else
-          instance_variable_set("@#{arg}", value)
+          send("#{arg}=", value)
         end
       end
 
