@@ -35,12 +35,12 @@ class Factory
       end
 
       def each
-        return to_enum(__method__) unless block_given?
+        return to_enum() unless block_given?
         @attributes.each { |value| yield value }
       end
 
       def each_pair
-        return to_enum(__method__) unless block_given?
+        return to_enum() unless block_given?
         @attributes.each_with_index { |value, i| yield @@args[i], value }
       end
 
